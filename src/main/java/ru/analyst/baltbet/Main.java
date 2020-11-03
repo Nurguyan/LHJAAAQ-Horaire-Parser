@@ -1,44 +1,38 @@
 package ru.analyst.baltbet;
 
+import jdk.internal.net.http.common.Pair;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.IOException;
-import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        String url = "https://www.lhjaaaq.com/fr/stats/horaire.html?season=2359&subSeason=2371&category=1093";
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\nkornilov\\Downloads\\chromedriver_win32\\chromedriver.exe");
-        String item = "Sommaire";
+    private static List<String> getMatchesUrls(String url, WebDriver driver) {
+        List<String> matchesUrls = new ArrayList<>();
+        driver.get(url);
+        List<WebElement> elements = driver.findElements(By.xpath("//table[@class='statistic_displayer']/tbody/tr/td[8]/div/a[@title='Sommaire du match']"));
+        elements.forEach((webElement -> matchesUrls.add(webElement.getAttribute("href"))));
+        return matchesUrls;
+    }
+
+    private static Pair<String, String> getMatchInfo(String url, WebDriver driver){
+        driver.get(url);
+        List<WebElement> teams = driver.findElements(By.xpath("//div[contains(@class,'section season_stats_section')]/div[contains(@class,'table_container')]/table[@class='statistic_displayer']/tbody/tr"));
+        Pair<String, String> info = new Pair<>(teams.get(0).getText(), teams.get(1).getText());
+        return info;
+    }
+
+    public static void main(String[] args) {
+        String statsUrl = "https://www.lhjaaaq.com/fr/stats/horaire.html?season=2359&subSeason=2371&category=1093";
+        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        try {
-            driver.get(url);
-            final WebElement schedule_container = driver.findElement(By.className("schedule_container"));
-            //String html = schedule_container.getAttribute("innerHTML");
-            List<WebElement> linkList = schedule_container.findElements(By.tagName("a"));
-            for (WebElement link : linkList) {
-                if (link.getText().equals(item)){
-                    System.out.println(link.getText() + " - " + link.getAttribute("href"));
-                    driver.get(link.getAttribute("href"));
-                    final String match_date = driver.findElement(By.className("date_container bg_primary")).getText();
-                    WebElement season_stats = driver.findElement(By.id("season_stats"));
-                    System.out.println(match_date  + ": " + season_stats.getText());
-                }
-            }
-        } finally {
-            driver.quit();
-        }
+
+//        List<String> matchesUrls = getMatchesUrls(statsUrl, driver);
+        getMatchInfo("https://www.lhjaaaq.com/fr/stats/sommaire.html?season=2359&subSeason=2371&category=1093&game=791202", driver);
+        driver.quit();
     }
 }
