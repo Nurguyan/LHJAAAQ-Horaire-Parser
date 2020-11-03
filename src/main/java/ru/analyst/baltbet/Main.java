@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -22,7 +23,7 @@ public class Main {
 
     private static List<String> getMatchInfo(String url, WebDriver driver){
         driver.get(url);
-        String date = driver.findElement(By.xpath("//div[contains(@class,'date_container bg_primary')]")).getText();
+        String date = driver.findElement(By.xpath("//span[@class='date']")).getText();
         List<WebElement> teams = driver.findElements(By.xpath("//div[contains(@class,'section season_stats_section')]/div[contains(@class,'table_container')]/table[@class='statistic_displayer']/tbody/tr"));
         List<String> matchInfo = new ArrayList<>(2);
         teams.forEach((team -> matchInfo.add(date.substring(date.indexOf(' ')+1).replace(",","") + ' ' + team.getText())));
@@ -33,8 +34,7 @@ public class Main {
         String statsUrl = "https://www.lhjaaaq.com/fr/stats/horaire.html?season=2359&subSeason=2371&category=1093";
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-
-        List<String> matchesUrls = getMatchesUrls(statsUrl, driver);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
         FileWriter writer = new FileWriter("stats.csv");
         char delimiter = ';';
@@ -67,6 +67,7 @@ public class Main {
         writer.append("PUN");
         writer.append(System.getProperty( "line.separator"));
 
+        List<String> matchesUrls = getMatchesUrls(statsUrl, driver);
         for (String matchUrl : matchesUrls) {
             List<String> matchInfos = getMatchInfo(matchUrl, driver);
             for (String matchInfo : matchInfos) {
