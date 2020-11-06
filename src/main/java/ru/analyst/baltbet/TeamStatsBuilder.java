@@ -1,19 +1,25 @@
 package ru.analyst.baltbet;
 
 public class TeamStatsBuilder {
+    private String date;
     private String location;
     private String name;
-    private int gf;
-    private int ga;
-    private double gFp;
-    private double gAp;
-    private double shp;
-    private double svp;
-    private double pPp;
-    private double pKp;
-    private int pun;
+    private String gf;
+    private String ga;
+    private String gFp;
+    private String gAp;
+    private String shp;
+    private String svp;
+    private String pPp;
+    private String pKp;
+    private String pun;
     private String result;
-    private int score;
+    private String score;
+
+    public TeamStatsBuilder setDate(String date) {
+        this.date = date;
+        return this;
+    }
 
     public TeamStatsBuilder setLocation(String location) {
         this.location = location;
@@ -25,47 +31,47 @@ public class TeamStatsBuilder {
         return this;
     }
 
-    public TeamStatsBuilder setGF(int gf) {
+    public TeamStatsBuilder setGF(String gf) {
         this.gf = gf;
         return this;
     }
 
-    public TeamStatsBuilder setGA(int ga) {
+    public TeamStatsBuilder setGA(String ga) {
         this.ga = ga;
         return this;
     }
 
-    public TeamStatsBuilder setGFPercentage(double gFp) {
+    public TeamStatsBuilder setGFp(String gFp) {
         this.gFp = gFp;
         return this;
     }
 
-    public TeamStatsBuilder setGAPercentage(double gAp) {
+    public TeamStatsBuilder setGAp(String gAp) {
         this.gAp = gAp;
         return this;
     }
 
-    public TeamStatsBuilder setShotsPercentage(double shp) {
+    public TeamStatsBuilder setShp(String shp) {
         this.shp = shp;
         return this;
     }
 
-    public TeamStatsBuilder setSavesPercentage(double svp) {
+    public TeamStatsBuilder setSvp(String svp) {
         this.svp = svp;
         return this;
     }
 
-    public TeamStatsBuilder setPowerPlaysPercentage(double pPp) {
+    public TeamStatsBuilder setPPp(String pPp) {
         this.pPp = pPp;
         return this;
     }
 
-    public TeamStatsBuilder setPowerKillsPercentage(double pKp) {
+    public TeamStatsBuilder setPKp(String pKp) {
         this.pKp = pKp;
         return this;
     }
 
-    public TeamStatsBuilder setPenaltyTime(int pun) {
+    public TeamStatsBuilder setPUN(String pun) {
         this.pun = pun;
         return this;
     }
@@ -75,12 +81,12 @@ public class TeamStatsBuilder {
         return this;
     }
 
-    public TeamStatsBuilder setScore(int score) {
+    public TeamStatsBuilder setScore(String score) {
         this.score = score;
         return this;
     }
 
     public TeamStats createTeamStats() {
-        return new TeamStats(location, name, gf, ga, gFp, gAp, shp, svp, pPp, pKp, pun, result, score);
+        return new TeamStats(date, location, name, gf, ga, gFp, gAp, shp, svp, pPp, pKp, pun, result, score);
     }
 }

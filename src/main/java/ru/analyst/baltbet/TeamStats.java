@@ -1,21 +1,26 @@
 package ru.analyst.baltbet;
 
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TeamStats {
-    private String location;
-    private String name;
-    private int GF;
-    private int GA;
-    private double GFp;
-    private double GAp;
-    private double Shp;
-    private double Svp;
-    private double PPp;
-    private double PKp;
-    private int PUN;
+    private final String date;
+    private final String location;
+    private final String name;
+    private final String GF;
+    private final String GA;
+    private final String GFp;
+    private final String GAp;
+    private final String Shp;
+    private final String Svp;
+    private final String PPp;
+    private final String PKp;
+    private final String PUN;
+    private final String result;
+    private final String score;
 
-    public TeamStats(String location, String name, int GF, int GA, double GFp, double GAp, double shp, double svp, double PPp, double PKp, int PUN, String result, int score) {
+    public TeamStats(String date, String location, String name, String GF, String GA, String GFp, String GAp, String shp, String svp, String PPp, String PKp, String PUN, String result, String score) {
+        this.date = date;
         this.location = location;
         this.name = name;
         this.GF = GF;
@@ -31,128 +36,42 @@ public class TeamStats {
         this.score = score;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    private String result;
-    private int score;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public String[] toStringArray() {
+        List<String> list = new ArrayList<>(14);
+        list.add(date);
+        list.add(location);
+        list.add(name);
+        list.add(GF);
+        list.add(GA);
+        list.add(GFp);
+        list.add(GAp);
+        list.add(Shp);
+        list.add(Svp);
+        list.add(PPp);
+        list.add(PKp);
+        list.add(PUN);
+        list.add(result);
+        list.add(score);
+        return list.toArray(new String[0]);
     }
 
     @Override
     public String toString() {
-        char delimiter = ';';
-        return  location + delimiter +
-                name + delimiter +
-                GF + delimiter +
-                GA + delimiter +
-                GFp + delimiter +
-                GAp + delimiter +
-                Shp + delimiter +
-                Svp + delimiter +
-                PPp + delimiter +
-                PKp + delimiter +
-                PUN + delimiter +
-                result + delimiter +
-                score;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getGF() {
-        return GF;
-    }
-
-    public void setGF(int GF) {
-        this.GF = GF;
-    }
-
-    public int getGA() {
-        return GA;
-    }
-
-    public void setGA(int GA) {
-        this.GA = GA;
-    }
-
-    public double getGFp() {
-        return GFp;
-    }
-
-    public void setGFp(double GFp) {
-        this.GFp = GFp;
-    }
-
-    public double getGAp() {
-        return GAp;
-    }
-
-    public void setGAp(double GAp) {
-        this.GAp = GAp;
-    }
-
-    public double getShp() {
-        return Shp;
-    }
-
-    public void setShp(double shp) {
-        Shp = shp;
-    }
-
-    public double getSvp() {
-        return Svp;
-    }
-
-    public void setSvp(double svp) {
-        Svp = svp;
-    }
-
-    public double getPPp() {
-        return PPp;
-    }
-
-    public void setPPp(double PPp) {
-        this.PPp = PPp;
-    }
-
-    public double getPKp() {
-        return PKp;
-    }
-
-    public void setPKp(double PKp) {
-        this.PKp = PKp;
-    }
-
-    public int getPUN() {
-        return PUN;
-    }
-
-    public void setPUN(int PUN) {
-        this.PUN = PUN;
+        return "TeamStats{" +
+                "date='" + date + '\'' +
+                ", location='" + location + '\'' +
+                ", name='" + name + '\'' +
+                ", GF='" + GF + '\'' +
+                ", GA='" + GA + '\'' +
+                ", GFp='" + GFp + '\'' +
+                ", GAp='" + GAp + '\'' +
+                ", Shp='" + Shp + '\'' +
+                ", Svp='" + Svp + '\'' +
+                ", PPp='" + PPp + '\'' +
+                ", PKp='" + PKp + '\'' +
+                ", PUN='" + PUN + '\'' +
+                ", result='" + result + '\'' +
+                ", score='" + score + '\'' +
+                '}';
     }
 }
