@@ -2,6 +2,7 @@
 
 This program parser matches of Quebec Junior Hockey League (https://www.lhjaaaq.com) in the foloowing format:
 | Field | Description |
+| --- | --- |
 | Date | Date of the match | 
 | Location | Home or Away | 
 | Team | Shortcut of team name | 
@@ -22,3 +23,6 @@ This program parser matches of Quebec Junior Hockey League (https://www.lhjaaaq.
 Program requires 2 arguments:
 1. URL to Horaire statistics page, for example: "https://www.lhjaaaq.com/fr/stats/horaire.html?season=2827&subSeason=2829&category=1093"
 2. Output file name in .csv, for example: "LHJAAAQ_2019-2020.csv"
+
+### Output
+A CSV file containing parsed data.
