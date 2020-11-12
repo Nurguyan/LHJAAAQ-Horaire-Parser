@@ -1,4 +1,4 @@
-package ru.analyst.baltbet;
+package com.company;
 
 public class MatchInfo {
     public TeamStats local;

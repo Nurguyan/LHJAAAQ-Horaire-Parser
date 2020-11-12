@@ -1,4 +1,4 @@
-package ru.analyst.baltbet;
+package com.company;
 
 import com.opencsv.CSVWriter;
 import org.openqa.selenium.By;
